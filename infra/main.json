@@ -683,10 +683,14 @@
                 "siteConfig": {
                   "linuxFxVersion": "node|18-lts",
                   "alwaysOn": true,
-                  "appCommandLine": "next start",
+                  "appCommandLine": "node server.js",
                   "ftpsState": "Disabled",
                   "minTlsVersion": "1.2",
                   "appSettings": [
+                    {
+                      "name": "AZURE_KEY_VAULT_NAME",
+                      "value": "[variables('keyVaultName')]"
+                    },
                     {
                       "name": "AZURE_KEY_VAULT_NAME",
                       "value": "[variables('keyVaultName')]"
@@ -819,6 +823,19 @@
                 "[resourceId('Microsoft.KeyVault/vaults', variables('keyVaultName'))]",
                 "[resourceId('Microsoft.KeyVault/vaults/secrets', variables('keyVaultName'), 'NEXTAUTH-SECRET')]"
               ]
+            },
+            {
+                "type": "Microsoft.Web/sites/extensions",
+                "apiVersion": "2021-03-01",
+                "name": "onedeploy",
+                "dependsOn": [
+                    "[resourceId('Microsoft.Web/Sites', variables('webapp_name'))]"
+                ],
+                "properties": {
+                    "packageUri": "https://azrchtzdply20240514.blob.core.windows.net/packages/Nextjs-site.zip",
+                    "type": "zip",
+                    "path": "/home/site/wwwroot"
+                }
             },
             {
               "type": "Microsoft.OperationalInsights/workspaces",
