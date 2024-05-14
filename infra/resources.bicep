@@ -122,10 +122,14 @@ resource webApp 'Microsoft.Web/sites@2020-06-01' = {
     siteConfig: {
       linuxFxVersion: 'node|18-lts'
       alwaysOn: true
-      appCommandLine: 'next start'
+      appCommandLine: 'node server.js'
       ftpsState: 'Disabled'
       minTlsVersion: '1.2'
       appSettings: [ 
+        {
+          name: 'WEBSITE_RUN_FROM_PACKAGE'
+          value: '1'
+        }
         { 
           name: 'AZURE_KEY_VAULT_NAME'
           value: keyVaultName
@@ -259,6 +263,7 @@ resource webAppZipDeploy 'Microsoft.Web/sites/extensions@2021-01-01' = {
   parent: webApp
   properties: {
     packageUri: package_uri
+    dbType: 'None'
   }
 }
 
