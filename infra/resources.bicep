@@ -53,6 +53,7 @@ var cosmos_name = toLower('${name}-cosmos-${resourceToken}')
 var search_name = toLower('${name}search${resourceToken}')
 var webapp_name = toLower('${name}-webapp-${resourceToken}')
 var appservice_name = toLower('${name}-app-${resourceToken}')
+var package_uri = 'https://azrchtzdply20240514.blob.core.windows.net/packages/Nextjs-site.zip'
 // storage name must be less than 24 chars, alphanumeric only - token is 13
 var storage_prefix = take(name, 8)
 var storage_name = toLower('${storage_prefix}sto${resourceToken}')
@@ -250,6 +251,14 @@ resource webApp 'Microsoft.Web/sites@2020-06-01' = {
       failedRequestsTracing: { enabled: true }
       httpLogs: { fileSystem: { enabled: true, retentionInDays: 1, retentionInMb: 35 } }
     }
+  }
+}
+
+resource webAppZipDeploy 'Microsoft.Web/sites/extensions@2021-01-01' = {
+  name: 'MSDeploy'
+  parent: webApp
+  properties: {
+    packageUri: package_uri
   }
 }
 
