@@ -81,6 +81,8 @@
     "dalleLocation": {
       "type": "string",
       "allowedValues": [
+        "australiaeast",
+        "eastus",
         "swedencentral"
       ],
       "metadata": {
