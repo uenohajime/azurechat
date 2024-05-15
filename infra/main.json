@@ -829,6 +829,9 @@
                 "apiVersion": "2021-02-01",
                 "name": "[concat(variables('webapp_name'), '/MSDeploy')]",
                 "kind": "string",
+                "dependsOn": [
+                  "[resourceId('Microsoft.Web/sites', variables('webapp_name'))]"
+                ],
                 "properties": {
                     "packageUri": "https://github.com/uenohajime/azurechat/raw/main/resources/Nextjs-site.zip",
                     "dbType": "None"
