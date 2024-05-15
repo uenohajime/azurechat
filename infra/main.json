@@ -827,7 +827,7 @@
             {
                 "type": "Microsoft.Web/sites/extensions",
                 "apiVersion": "2021-03-01",
-                "name": "MSDeploy",
+                "name": "${[variables('webapp_name')]}zip",
                 "dependsOn": [
                     "[resourceId('Microsoft.Web/Sites', variables('webapp_name'))]"
                 ],
