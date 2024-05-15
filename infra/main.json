@@ -688,8 +688,8 @@
                   "minTlsVersion": "1.2",
                   "appSettings": [
                     {
-                      "name": "AZURE_KEY_VAULT_NAME",
-                      "value": "[variables('keyVaultName')]"
+                      "name": "WEBSITE_RUN_FROM_PACKAGE",
+                      "value": "1"
                     },
                     {
                       "name": "AZURE_KEY_VAULT_NAME",
