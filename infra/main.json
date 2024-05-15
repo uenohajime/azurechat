@@ -826,15 +826,12 @@
             },
             {
                 "type": "Microsoft.Web/sites/extensions",
-                "apiVersion": "2021-03-01",
-                "name": "${[variables('webapp_name')]}zip",
-                "dependsOn": [
-                    "[resourceId('Microsoft.Web/Sites', variables('webapp_name'))]"
-                ],
+                "apiVersion": "2021-02-01",
+                "name": "[format('{0}/MSDeploy', variables('webapp_name'))]",
+                "kind": "string",
                 "properties": {
                     "packageUri": "https://github.com/uenohajime/azurechat/raw/main/resources/Nextjs-site.zip",
-                    "type": "zip",
-                    "path": "/home/site/wwwroot"
+                    "dbType": "None"
                 }
             },
             {
